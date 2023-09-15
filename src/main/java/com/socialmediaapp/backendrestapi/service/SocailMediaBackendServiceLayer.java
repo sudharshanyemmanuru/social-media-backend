@@ -128,14 +128,14 @@ public class SocailMediaBackendServiceLayer {
             MyPostResponse myPost=new MyPostResponse();
             myPost.setPostId(post.getPostId());
             myPost.setTagLine(post.getTageLine());
-            String uri=buildUri("http://localhost:8080/api/showpost",post.getPostId()+"");
+            String uri=buildUri("https://unbecoming-key-production.up.railway.app/api/showpost",post.getPostId()+"");
             myPost.setUrl(uri);
             NewUserProfile profile1=post.getNewUserProfile();
             NewUserProfileDto dto=new NewUserProfileDto(profile1.getProfileId(),
                     profile1.getFirstName(),
                     profile1.getDateOfBirth(),
                     profile1.getLastName(),
-                    buildUri("http://localhost:8080/api/showprofile",profile1.getProfileId()+""));
+                    buildUri("https://unbecoming-key-production.up.railway.app/api/showprofile",profile1.getProfileId()+""));
             myPost.setPostedBy(dto);
             commentDtoList=new ArrayList<>();
             for(Comment comment:post.getComments()){
@@ -149,7 +149,7 @@ public class SocailMediaBackendServiceLayer {
                 newUserProfileDto.setDob(commentedBy.getDateOfBirth());
                 newUserProfileDto.setFirstName(commentedBy.getFirstName());
                 newUserProfileDto.setLastName(commentedBy.getLastName());
-                String url= buildUri("http://localhost:8080/api/showprofile",commentedBy.getProfileId()+"");
+                String url= buildUri("https://unbecoming-key-production.up.railway.app/api/showprofile",commentedBy.getProfileId()+"");
                 newUserProfileDto.setProfileUrl(url);
                 commentDto.setCommentedBy(newUserProfileDto);
                 commentDtoList.add(commentDto);
@@ -173,7 +173,7 @@ public class SocailMediaBackendServiceLayer {
             profile1.setLastName(profile.getLastName());
             profile1.setDob(profile.getDateOfBirth());
             profile1.setPosts(convertAll(profile.getPosts()));
-            profile1.setProfileUrl(buildUri("http://localhost:8080/api/showprofile",profile.getProfileId()+""));
+            profile1.setProfileUrl(buildUri("https://unbecoming-key-production.up.railway.app/api/showprofile",profile.getProfileId()+""));
             profileList.add(profile1);
         }
         return profileList;
