@@ -7,6 +7,9 @@ import com.socialmediaapp.backendrestapi.dto.Profile;
 import com.socialmediaapp.backendrestapi.model.*;
 import com.socialmediaapp.backendrestapi.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -112,9 +115,11 @@ public class SocailMediaBackendServiceLayer {
         List<Post>allPosts=postRepository.findAll();
         return convertAll(allPosts);
     }
-    public List<Profile> getAllPeople(String userName){
-        List<NewUserProfile> fetchedPeople=newUserProfileRepository.findAll();
-        List<Profile> allPeople=convertProfiles(fetchedPeople);
+    public List<Profile> getAllPeople(String userName,int pageNum){
+        int pageSize=5;
+        Pageable pageable= PageRequest.of(pageNum-1,pageSize);
+        Page<NewUserProfile> fetchedPeople=newUserProfileRepository.findAll(pageable);
+        List<Profile> allPeople=convertProfiles(fetchedPeople.getContent());
         return allPeople.stream()
                 .filter(people->people.getFirstName()!=userName).toList();
     }

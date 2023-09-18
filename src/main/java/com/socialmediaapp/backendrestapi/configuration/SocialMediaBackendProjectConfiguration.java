@@ -24,7 +24,7 @@ public class SocialMediaBackendProjectConfiguration {
                         .requestMatchers("/api/myposts").authenticated()
                         .requestMatchers("/api/postcomment/**").authenticated()
                         .requestMatchers("/api/all-posts").authenticated()
-                        .requestMatchers("/api/all-people").authenticated()
+                        .requestMatchers("/api/all-people/**").authenticated()
                         .requestMatchers("/api/send-friend-request/**").authenticated()
                         .requestMatchers("/api/get-friend-requests").authenticated()
                         .requestMatchers("/static/**").permitAll()

@@ -64,9 +64,9 @@ public class SocialMediaBackendController {
    public List<MyPostResponse> getAllPosts(){
         return socailMediaBackendServiceLayer.getAllPosts();
    }
-   @GetMapping("/all-people")
-   public List<Profile> getAllPeople(Authentication authentication){
-        return socailMediaBackendServiceLayer.getAllPeople(authentication.getName());
+   @GetMapping("/all-people/{pageNum}")
+   public List<Profile> getAllPeople(Authentication authentication,@PathVariable int pageNum){
+        return socailMediaBackendServiceLayer.getAllPeople(authentication.getName(),pageNum);
    }
    @PostMapping("/send-friend-request/{profileId}")
    public String sendFriendRequest(@PathVariable int profileId,Authentication authentication){
